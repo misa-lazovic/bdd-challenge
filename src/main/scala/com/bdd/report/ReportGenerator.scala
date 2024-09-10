@@ -34,7 +34,7 @@ object ReportGenerator {
     val kafkaStream: DataFrame = spark
       .readStream
       .format("kafka")
-      .option("kafka.bootstrap.servers", "localhost:9092")
+      .option("kafka.bootstrap.servers", "kafka:9093")
       .option("subscribe", "view_log")
       .load()
 
@@ -63,8 +63,8 @@ object ReportGenerator {
     val query = reportDF
       .writeStream
       .format("parquet")
-      .option("checkpointLocation", "storage/checkpoint")
-      .option("path", "storage/output")
+      .option("checkpointLocation", "/app/storage/checkpoint")
+      .option("path", "/app/storage/output")
       .outputMode("append")
       .start()
 

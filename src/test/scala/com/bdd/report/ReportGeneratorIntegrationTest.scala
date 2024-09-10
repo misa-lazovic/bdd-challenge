@@ -16,7 +16,7 @@ class ReportGeneratorIntegrationTest extends AnyFunSuite with BeforeAndAfterAll 
     .getOrCreate()
 
   val kafkaProps = new Properties()
-  kafkaProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092")
+  kafkaProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka:9093")
   kafkaProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, classOf[StringSerializer].getName)
   kafkaProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, classOf[StringSerializer].getName)
 

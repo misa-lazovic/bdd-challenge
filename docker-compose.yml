@@ -19,9 +19,18 @@ services:
     depends_on:
       - zookeeper
 
+  topic-creator:
+    image: wurstmeister/kafka:latest
+    container_name: topic-creator
+    depends_on:
+      - kafka
+    entrypoint: [ "/bin/bash", "/create-topics.sh" ]
+    volumes:
+      - ./create-topics.sh:/create-topics.sh
+
   report-generator:
     build: .
     depends_on:
-      - kafka
+      - topic-creator
     volumes:
       - ./storage/campaigns.csv:/app/storage/campaigns.csv
