@@ -5,7 +5,7 @@ import org.apache.spark.sql.{DataFrame, SparkSession}
 import org.scalatest.BeforeAndAfterAll
 import org.scalatest.funsuite.AnyFunSuite
 
-class ReportGeneratorTest extends AnyFunSuite with BeforeAndAfterAll {
+class ReportGeneratorUnitTest extends AnyFunSuite with BeforeAndAfterAll {
 
   val spark: SparkSession = SparkSession.builder
     .appName("ReportGeneratorTest")
