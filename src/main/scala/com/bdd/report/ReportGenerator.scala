@@ -57,7 +57,7 @@ object ReportGenerator {
         avg("duration").as("avg_duration"),
         count("*").as("total_count")
       )
-      .withColumn("minute_timestamp", col("window.start"))
+      .withColumn("minute_timestamp", unix_timestamp(col("window.start")))
       .drop("window")
 
     val query = reportDF
@@ -66,6 +66,7 @@ object ReportGenerator {
       .option("checkpointLocation", "/app/storage/checkpoint")
       .option("path", "/app/storage/output")
       .outputMode("append")
+      .partitionBy("network_id", "minute_timestamp")
       .start()
 
     query.awaitTermination()

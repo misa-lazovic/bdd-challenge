@@ -16,7 +16,7 @@ class ReportGeneratorIntegrationTest extends AnyFunSuite with BeforeAndAfterAll 
     .getOrCreate()
 
   val kafkaProps = new Properties()
-  kafkaProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "kafka:9093")
+  kafkaProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092")
   kafkaProps.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, classOf[StringSerializer].getName)
   kafkaProps.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, classOf[StringSerializer].getName)
 
@@ -25,7 +25,8 @@ class ReportGeneratorIntegrationTest extends AnyFunSuite with BeforeAndAfterAll 
   def sendSampleData(): Unit = {
     val records = Seq(
       """{"view_id":"view1","start_timestamp":"2024-09-09T10:00:00Z","end_timestamp":"2024-09-09T10:01:00Z","banner_id":101,"campaign_id":10}""",
-      """{"view_id":"view2","start_timestamp":"2024-09-09T10:05:00Z","end_timestamp":"2024-09-09T10:06:00Z","banner_id":102,"campaign_id":10}"""
+      """{"view_id":"view2","start_timestamp":"2024-09-09T10:00:00Z","end_timestamp":"2024-09-09T10:01:00Z","banner_id":102,"campaign_id":10}""",
+      """{"view_id":"view3","start_timestamp":"2024-09-09T10:05:00Z","end_timestamp":"2024-09-09T10:06:00Z","banner_id":103,"campaign_id":20}"""
     )
 
     records.foreach(record => {
